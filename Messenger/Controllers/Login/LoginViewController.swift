@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class LoginViewController: UIViewController {
     
@@ -117,7 +118,6 @@ class LoginViewController: UIViewController {
     
     @objc
     private func loginButtonTapped() {
-        
         emailField.resignFirstResponder()
         passwordField.resignFirstResponder()
 
@@ -130,7 +130,20 @@ class LoginViewController: UIViewController {
             return
         }
         
-        //TODO: Firebase Log In
+        //Firebase Log In
+        
+        FirebaseAuth.Auth.auth().signIn(withEmail: email, password: password) { [weak self] authResult, error in
+            guard let strongSelf = self else { return }
+            guard let result = authResult,
+                  error == nil else {
+                print("Error logging in user with email: \(email), password: \(password)")
+                return
+            }
+            
+            let user = result.user
+            print("Logged In User: \(user)")
+            strongSelf.navigationController?.dismiss(animated: true)
+        }
     }
     
     func alertUserLoginError() {
