@@ -24,6 +24,7 @@
 		BF40BF18289E75810021FEE8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BF40BF17289E75800021FEE8 /* GoogleService-Info.plist */; };
 		BF40BF1A289FCE460021FEE8 /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF40BF19289FCE450021FEE8 /* DatabaseManager.swift */; };
 		BF4EF1F028A17382008224E4 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4EF1EF28A17382008224E4 /* ChatViewController.swift */; };
+		BF4EF1F228A2E053008224E4 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4EF1F128A2E053008224E4 /* StorageManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +49,7 @@
 		BF40BF19289FCE450021FEE8 /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
 		BF40BF1B289FEF5A0021FEE8 /* Messenger.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Messenger.entitlements; sourceTree = "<group>"; };
 		BF4EF1EF28A17382008224E4 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
+		BF4EF1F128A2E053008224E4 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 		DFE3864A3D20B8229166DFDA /* Pods_Messenger.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Messenger.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -148,6 +150,7 @@
 				BF40BEF0289D6FB10021FEE8 /* SceneDelegate.swift */,
 				BF40BF15289E57A20021FEE8 /* Extensions.swift */,
 				BF40BF19289FCE450021FEE8 /* DatabaseManager.swift */,
+				BF4EF1F128A2E053008224E4 /* StorageManager.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -307,6 +310,7 @@
 				BF40BEF1289D6FB10021FEE8 /* SceneDelegate.swift in Sources */,
 				BF4EF1F028A17382008224E4 /* ChatViewController.swift in Sources */,
 				BF40BF0D289D72C60021FEE8 /* PhotoViewerViewController.swift in Sources */,
+				BF4EF1F228A2E053008224E4 /* StorageManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

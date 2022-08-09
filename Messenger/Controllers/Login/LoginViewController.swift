@@ -94,8 +94,8 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
         
         loginObserver = NotificationCenter.default.addObserver(forName: .didLogInNotification,
-                                               object: nil,
-                                               queue: .main) { [weak self] _ in
+                                                               object: nil,
+                                                               queue: .main) { [weak self] _ in
             guard let strongSelf = self else { return }
             strongSelf.navigationController?.dismiss(animated: true)
         }
@@ -168,9 +168,9 @@ class LoginViewController: UIViewController {
                                            height: 52)
         
         googleLoginButton.frame = CGRect(x: 30,
-                                           y: facebookLoginButton.bottom+10,
-                                           width: scrollView.width-60,
-                                           height: 52)
+                                         y: facebookLoginButton.bottom+10,
+                                         width: scrollView.width-60,
+                                         height: 52)
     }
     
     @objc
@@ -194,7 +194,7 @@ class LoginViewController: UIViewController {
             guard let strongSelf = self else { return }
             
             DispatchQueue.main.async {
-                strongSelf.spinner.dismiss(animated: true)                
+                strongSelf.spinner.dismiss(animated: true)
             }
             
             guard let result = authResult,
@@ -247,7 +247,7 @@ extension LoginViewController: LoginButtonDelegate {
         }
         
         let facebookRequest = FBSDKLoginKit.GraphRequest(graphPath: "me",
-                                                         parameters: ["fields": "email, name"],
+                                                         parameters: ["fields": "email, first_name, last_name, picture.type(large)"],
                                                          tokenString: token,
                                                          version: nil,
                                                          httpMethod: .get)
@@ -258,25 +258,49 @@ extension LoginViewController: LoginButtonDelegate {
                 return
             }
             
-            guard let userName = result["name"] as? String,
-                  let email = result["email"] as? String else {
+            guard let firstName = result["first_name"] as? String,
+                  let lastName = result["last_name"] as? String,
+                  let email = result["email"] as? String,
+            let picture = result["picture"] as? [String: Any],
+            let data = picture["data"] as? [String: Any],
+            let pictureUrl = data["url"] as? String else {
                 print("Failed to get name and email from Facebook")
                 return
             }
             
-            let nameComponents = userName.components(separatedBy: " ")
-            guard nameComponents.count == 2 else {
-                return
-            }
-            
-            let firstName = nameComponents[0]
-            let lastName = nameComponents[1]
-            
-            DatabaseManager.shared.userExists(with: email) { exists in
+            print(result)
+            DatabaseManager.shared.userExists(with: email) { [weak self] exists in
+                guard let strongSelf = self else { return }
                 if !exists {
-                    DatabaseManager.shared.insertUser(with: ChatAppUser(firstName: firstName,
-                                                                        lastName: lastName,
-                                                                        emailAddress: email))
+                    let chatUser = ChatAppUser(firstName: firstName,
+                                               lastName: lastName,
+                                               emailAddress: email)
+                    DatabaseManager.shared.insertUser(with: chatUser) { success in
+                        if success {
+                            guard let url = URL(string: pictureUrl) else { return }
+                            
+                            print("Downloading data from facebook image")
+                            
+                            URLSession.shared.dataTask(with: url) { data, _, _ in
+                                guard let data = data else {
+                                    print("Failed to get data from facebook")
+                                    return
+                                }
+                                
+                                print("Got data from facebook, uploading...")
+                                let fileName = chatUser.profilePictureFileName
+                                StorageManager.shared.uploadProfilePicture(with: data, fileName: fileName) { result in
+                                    switch result {
+                                    case .success(let downloadUrl):
+                                        UserDefaults.standard.set(downloadUrl, forKey: "profile_picture_url")
+                                        print(downloadUrl)
+                                    case .failure(let error):
+                                        print("Storage manager error: \(error)")
+                                    }
+                                }
+                            }.resume()
+                        }
+                    }
                 }
             }
             
@@ -340,14 +364,42 @@ extension LoginViewController {
                     return
                 }
                 
-                DatabaseManager.shared.userExists(with: email) { exists in
+                DatabaseManager.shared.userExists(with: email) { [weak self] exists in
+                    guard let strongSelf = self else { return }
                     if !exists {
-                        DatabaseManager.shared.insertUser(with: ChatAppUser(firstName: firstName,
-                                                                            lastName: lastName,
-                                                                            emailAddress: email))
+                        let chatUser = ChatAppUser(firstName: firstName,
+                                                   lastName: lastName,
+                                                   emailAddress: email)
+                        DatabaseManager.shared.insertUser(with: chatUser) { success in
+                            if success {
+                                
+                                if let userProfile = user.profile {
+                                    if userProfile.hasImage {
+                                        guard let url = userProfile.imageURL(withDimension: 200) else { return }
+                                        
+                                        URLSession.shared.dataTask(with: url) { data, _, _ in
+                                            guard let data = data else {
+                                                return
+                                            }
+                                            
+                                            let fileName = chatUser.profilePictureFileName
+                                            StorageManager.shared.uploadProfilePicture(with: data, fileName: fileName) { result in
+                                                switch result {
+                                                case .success(let downloadUrl):
+                                                    UserDefaults.standard.set(downloadUrl, forKey: "profile_picture_url")
+                                                    print(downloadUrl)
+                                                case .failure(let error):
+                                                    print("Storage manager error: \(error)")
+                                                }
+                                            }
+                                        }.resume()
+                                    }
+                                }
+                                
+                            }
+                        }
                     }
                 }
-                
                 
                 let credential = GoogleAuthProvider.credential(withIDToken: idToken,
                                                                accessToken: authentication.accessToken)
