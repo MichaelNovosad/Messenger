@@ -204,6 +204,9 @@ class LoginViewController: UIViewController {
             }
             
             let user = result.user
+            
+            UserDefaults.standard.set(email, forKey: "email")
+            
             print("Logged In User: \(user)")
             strongSelf.navigationController?.dismiss(animated: true)
         }
@@ -267,6 +270,8 @@ extension LoginViewController: LoginButtonDelegate {
                 print("Failed to get name and email from Facebook")
                 return
             }
+            
+            UserDefaults.standard.set(email, forKey: "email")
             
             print(result)
             DatabaseManager.shared.userExists(with: email) { [weak self] exists in
@@ -363,6 +368,8 @@ extension LoginViewController {
                     print("Missing auth object of google user")
                     return
                 }
+                
+                UserDefaults.standard.set(email, forKey: "email")
                 
                 DatabaseManager.shared.userExists(with: email) { [weak self] exists in
                     guard let strongSelf = self else { return }
