@@ -25,6 +25,7 @@
 		BF40BF1A289FCE460021FEE8 /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF40BF19289FCE450021FEE8 /* DatabaseManager.swift */; };
 		BF4EF1F028A17382008224E4 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4EF1EF28A17382008224E4 /* ChatViewController.swift */; };
 		BF4EF1F228A2E053008224E4 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4EF1F128A2E053008224E4 /* StorageManager.swift */; };
+		BF73AE5528B3C487002176D2 /* ConversationsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF73AE5428B3C487002176D2 /* ConversationsTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +51,7 @@
 		BF40BF1B289FEF5A0021FEE8 /* Messenger.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Messenger.entitlements; sourceTree = "<group>"; };
 		BF4EF1EF28A17382008224E4 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		BF4EF1F128A2E053008224E4 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
+		BF73AE5428B3C487002176D2 /* ConversationsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationsTableViewCell.swift; sourceTree = "<group>"; };
 		DFE3864A3D20B8229166DFDA /* Pods_Messenger.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Messenger.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -125,6 +127,7 @@
 			children = (
 				BF40BF07289D71D60021FEE8 /* Storyboards */,
 				BF40BEF7289D6FB30021FEE8 /* Assets.xcassets */,
+				BF73AE5428B3C487002176D2 /* ConversationsTableViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -302,6 +305,7 @@
 				BF40BF1A289FCE460021FEE8 /* DatabaseManager.swift in Sources */,
 				BF40BF0B289D72A70021FEE8 /* RegisterViewController.swift in Sources */,
 				BF40BF11289D72F00021FEE8 /* NewConversationViewController.swift in Sources */,
+				BF73AE5528B3C487002176D2 /* ConversationsTableViewCell.swift in Sources */,
 				BF40BEF3289D6FB10021FEE8 /* ConversationsViewController.swift in Sources */,
 				BF40BF0F289D72D20021FEE8 /* VideoPlayerViewController.swift in Sources */,
 				BF40BF16289E57A20021FEE8 /* Extensions.swift in Sources */,
