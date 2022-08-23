@@ -26,6 +26,7 @@
 		BF4EF1F028A17382008224E4 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4EF1EF28A17382008224E4 /* ChatViewController.swift */; };
 		BF4EF1F228A2E053008224E4 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4EF1F128A2E053008224E4 /* StorageManager.swift */; };
 		BF73AE5528B3C487002176D2 /* ConversationsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF73AE5428B3C487002176D2 /* ConversationsTableViewCell.swift */; };
+		BF73AE5728B535CE002176D2 /* NewConversationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF73AE5628B535CE002176D2 /* NewConversationCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,6 +53,7 @@
 		BF4EF1EF28A17382008224E4 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		BF4EF1F128A2E053008224E4 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 		BF73AE5428B3C487002176D2 /* ConversationsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationsTableViewCell.swift; sourceTree = "<group>"; };
+		BF73AE5628B535CE002176D2 /* NewConversationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewConversationCell.swift; sourceTree = "<group>"; };
 		DFE3864A3D20B8229166DFDA /* Pods_Messenger.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Messenger.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -128,6 +130,7 @@
 				BF40BF07289D71D60021FEE8 /* Storyboards */,
 				BF40BEF7289D6FB30021FEE8 /* Assets.xcassets */,
 				BF73AE5428B3C487002176D2 /* ConversationsTableViewCell.swift */,
+				BF73AE5628B535CE002176D2 /* NewConversationCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -302,6 +305,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BF40BF09289D729A0021FEE8 /* LoginViewController.swift in Sources */,
+				BF73AE5728B535CE002176D2 /* NewConversationCell.swift in Sources */,
 				BF40BF1A289FCE460021FEE8 /* DatabaseManager.swift in Sources */,
 				BF40BF0B289D72A70021FEE8 /* RegisterViewController.swift in Sources */,
 				BF40BF11289D72F00021FEE8 /* NewConversationViewController.swift in Sources */,
@@ -379,7 +383,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_OPTIMIZATION_LEVEL = 1;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -438,6 +442,7 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = s;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -447,6 +452,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
@@ -467,6 +473,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Messenger/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "Please allow access to take a profile picture";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Please allow acces to send audio and video messages.";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Please allow access to select a photo for your profile";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -501,6 +508,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Messenger/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "Please allow access to take a profile picture";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Please allow acces to send audio and video messages.";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Please allow access to select a photo for your profile";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;

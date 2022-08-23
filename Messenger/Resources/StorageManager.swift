@@ -44,14 +44,13 @@ final class StorageManager {
     public func uploadMessagePhoto(with data: Data, fileName: String, completion: @escaping UploadPictureCompletion) {
         
         storage.child("message_images/\(fileName)").putData(data, metadata: nil) { [weak self] metadata, error in
-            guard let strongSelf = self else { return }
             guard error == nil else {
                 print("Failed to upload picture to firebase storage")
                 completion(.failure(StorageErrors.failedToUpload))
                 return
             }
             
-            strongSelf.storage.child("message_images/\(fileName)").downloadURL { url, error in
+            self?.storage.child("message_images/\(fileName)").downloadURL { url, error in
                 guard let url = url else {
                     print("Failed to get download URL")
                     completion(.failure(StorageErrors.failedToGetDownloadURL))
@@ -65,6 +64,28 @@ final class StorageManager {
         }
     }
     
+    /// Upload video that will be sent in a conversation message
+    public func uploadMessageVideo(with fileUrl: URL, fileName: String, completion: @escaping UploadPictureCompletion) {
+        storage.child("message_videos/\(fileName)").putFile(from: fileUrl, metadata: nil) { [weak self] _, error in
+            guard error == nil else {
+                print("Failed to upload video to firebase storage")
+                completion(.failure(StorageErrors.failedToUpload))
+                return
+            }
+            
+            self?.storage.child("message_videos/\(fileName)").downloadURL { url, error in
+                guard let url = url else {
+                    print("Failed to get download URL")
+                    completion(.failure(StorageErrors.failedToGetDownloadURL))
+                    return
+                }
+                
+                let urlString = url.absoluteString
+                print("Download url returned:", urlString)
+                completion(.success(urlString))
+            }
+        }
+    }
     
     public enum StorageErrors: Error {
         case failedToUpload
