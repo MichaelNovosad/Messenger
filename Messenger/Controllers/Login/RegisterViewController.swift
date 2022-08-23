@@ -104,13 +104,8 @@ class RegisterViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Log In"
+        title = "Register"
         view.backgroundColor = .white
-        
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Register",
-                                                            style: .done,
-                                                            target: self,
-                                                            action: #selector(didTapRegister))
         
         registerButton.addTarget(self,
                               action: #selector(loginButtonTapped),
@@ -219,7 +214,7 @@ class RegisterViewController: UIViewController {
             FirebaseAuth.Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
                 guard authResult != nil,
                       error == nil else {
-                    print("Error creating user")
+                    print("Error creating user: \(error?.localizedDescription)")
                     return
                 }
                 
