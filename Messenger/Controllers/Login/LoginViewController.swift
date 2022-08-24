@@ -24,7 +24,7 @@ class LoginViewController: UIViewController {
     
     private let imageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "logo")
+        imageView.image = UIImage(named: "logo-1")
         imageView.contentMode = .scaleAspectFit
         return imageView
     }()
@@ -140,7 +140,7 @@ class LoginViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         scrollView.frame = view.bounds
-        let size = scrollView.width/5
+        let size = scrollView.width/4
         
         imageView.frame = CGRect(x: (scrollView.width-size)/2,
                                  y: 20,
