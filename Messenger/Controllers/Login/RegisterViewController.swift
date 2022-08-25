@@ -41,7 +41,7 @@ class RegisterViewController: UIViewController {
         emailField.placeholder = "First Name..."
         emailField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 5, height: 0))
         emailField.leftViewMode = .always
-        emailField.backgroundColor = .white
+        emailField.backgroundColor = .secondarySystemBackground
         return emailField
     }()
     
@@ -56,7 +56,7 @@ class RegisterViewController: UIViewController {
         emailField.placeholder = "Last Name..."
         emailField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 5, height: 0))
         emailField.leftViewMode = .always
-        emailField.backgroundColor = .white
+        emailField.backgroundColor = .secondarySystemBackground
         return emailField
     }()
     
@@ -71,7 +71,7 @@ class RegisterViewController: UIViewController {
         emailField.placeholder = "Email Address..."
         emailField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 5, height: 0))
         emailField.leftViewMode = .always
-        emailField.backgroundColor = .white
+        emailField.backgroundColor = .secondarySystemBackground
         return emailField
     }()
     
@@ -87,7 +87,7 @@ class RegisterViewController: UIViewController {
         passwordField.placeholder = "Password..."
         passwordField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 5, height: 0))
         passwordField.leftViewMode = .always
-        passwordField.backgroundColor = .white
+        passwordField.backgroundColor = .secondarySystemBackground
         return passwordField
     }()
     
@@ -105,7 +105,7 @@ class RegisterViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Register"
-        view.backgroundColor = .white
+        view.backgroundColor = .systemBackground
         
         registerButton.addTarget(self,
                               action: #selector(loginButtonTapped),

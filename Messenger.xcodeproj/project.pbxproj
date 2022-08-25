@@ -27,6 +27,7 @@
 		BF4EF1F228A2E053008224E4 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4EF1F128A2E053008224E4 /* StorageManager.swift */; };
 		BF73AE5528B3C487002176D2 /* ConversationsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF73AE5428B3C487002176D2 /* ConversationsTableViewCell.swift */; };
 		BF73AE5728B535CE002176D2 /* NewConversationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF73AE5628B535CE002176D2 /* NewConversationCell.swift */; };
+		BF73AE5928B77144002176D2 /* LocationPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF73AE5828B77144002176D2 /* LocationPickerViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,6 +55,7 @@
 		BF4EF1F128A2E053008224E4 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 		BF73AE5428B3C487002176D2 /* ConversationsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationsTableViewCell.swift; sourceTree = "<group>"; };
 		BF73AE5628B535CE002176D2 /* NewConversationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewConversationCell.swift; sourceTree = "<group>"; };
+		BF73AE5828B77144002176D2 /* LocationPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationPickerViewController.swift; sourceTree = "<group>"; };
 		DFE3864A3D20B8229166DFDA /* Pods_Messenger.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Messenger.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -113,6 +115,7 @@
 		BF40BF02289D71960021FEE8 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				BF73AE5828B77144002176D2 /* LocationPickerViewController.swift */,
 				BF40BEF2289D6FB10021FEE8 /* ConversationsViewController.swift */,
 				BF40BF14289E528B0021FEE8 /* Login */,
 				BF40BF0C289D72C60021FEE8 /* PhotoViewerViewController.swift */,
@@ -319,6 +322,7 @@
 				BF4EF1F028A17382008224E4 /* ChatViewController.swift in Sources */,
 				BF40BF0D289D72C60021FEE8 /* PhotoViewerViewController.swift in Sources */,
 				BF4EF1F228A2E053008224E4 /* StorageManager.swift in Sources */,
+				BF73AE5928B77144002176D2 /* LocationPickerViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
