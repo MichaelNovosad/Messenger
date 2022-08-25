@@ -12,7 +12,7 @@ import GoogleSignIn
 import Firebase
 import JGProgressHUD
 
-class LoginViewController: UIViewController {
+final class LoginViewController: UIViewController {
     
     private let spinner = JGProgressHUD(style: .dark)
     
@@ -96,8 +96,7 @@ class LoginViewController: UIViewController {
         loginObserver = NotificationCenter.default.addObserver(forName: .didLogInNotification,
                                                                object: nil,
                                                                queue: .main) { [weak self] _ in
-            guard let strongSelf = self else { return }
-            strongSelf.navigationController?.dismiss(animated: true)
+            self?.navigationController?.dismiss(animated: true)
         }
         
         title = "Log In"
@@ -191,10 +190,9 @@ class LoginViewController: UIViewController {
         
         //Firebase Log In
         FirebaseAuth.Auth.auth().signIn(withEmail: email, password: password) { [weak self] authResult, error in
-            guard let strongSelf = self else { return }
             
             DispatchQueue.main.async {
-                strongSelf.spinner.dismiss(animated: true)
+                self?.spinner.dismiss(animated: true)
             }
             
             guard let result = authResult,
@@ -222,7 +220,7 @@ class LoginViewController: UIViewController {
             UserDefaults.standard.set(email, forKey: "email")
 
             print("Logged In User: \(user)")
-            strongSelf.navigationController?.dismiss(animated: true)
+            self?.navigationController?.dismiss(animated: true)
         }
     }
     
@@ -255,7 +253,7 @@ extension LoginViewController: UITextFieldDelegate {
         return true
     }
 }
-
+// MARK: - Facebook sign in
 extension LoginViewController: LoginButtonDelegate {
     func loginButton(_ loginButton: FBLoginButton, didCompleteWith result: LoginManagerLoginResult?, error: Error?) {
         guard let token = result?.token?.tokenString else {
@@ -327,7 +325,6 @@ extension LoginViewController: LoginButtonDelegate {
             let credential = FacebookAuthProvider.credential(withAccessToken: token)
             
             FirebaseAuth.Auth.auth().signIn(with: credential) { [weak self] authResult, error in
-                guard let strongSelf = self else { return }
                 guard authResult != nil, error == nil else {
                     if let error = error {
                         print("Facebook credential login failed, MFA may be needed - \(error)")
@@ -336,7 +333,7 @@ extension LoginViewController: LoginButtonDelegate {
                 }
                 
                 print("Successfully Logged In via Facebook")
-                strongSelf.navigationController?.dismiss(animated: true)
+                self?.navigationController?.dismiss(animated: true)
             }
         }
         
@@ -348,6 +345,7 @@ extension LoginViewController: LoginButtonDelegate {
     
 }
 
+// MARK: - Google sign in
 extension LoginViewController {
     @objc
     public func signUpWithGoogle() {
@@ -428,7 +426,6 @@ extension LoginViewController {
                                                                accessToken: authentication.accessToken)
                 
                 FirebaseAuth.Auth.auth().signIn(with: credential) { [weak self] authResult, error in
-                    guard let strongSelf = self else { return }
                     guard authResult != nil, error == nil else {
                         if let error = error {
                             print("Google credential login failed - \(error)")
@@ -438,7 +435,7 @@ extension LoginViewController {
                     print("Successfully Signed In via Google")
                     NotificationCenter.default.post(name: .didLogInNotification, object: nil)
                     
-                    strongSelf.navigationController?.dismiss(animated: true)
+                    self?.navigationController?.dismiss(animated: true)
                 }
             }
         }

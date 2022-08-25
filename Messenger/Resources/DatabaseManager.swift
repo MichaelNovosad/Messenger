@@ -10,11 +10,15 @@ import FirebaseDatabase
 import MessageKit
 import CoreLocation
 
+/// Manager object to read and write data to real time firebase database
 final class DatabaseManager {
     
-    static let shared = DatabaseManager()
+    /// Shared instance of class
+    public static let shared = DatabaseManager()
     
     private let database = Database.database().reference()
+    
+    private init() { }
     
     static func safeEmail(emailAddress: String) -> String {
         var safeEmail = emailAddress.replacingOccurrences(of: ".", with: "-")
@@ -24,9 +28,9 @@ final class DatabaseManager {
 }
 
 extension DatabaseManager {
-    
+    /// Returns dictionary node at child path
     public func getDataFor(path: String, completion: @escaping (Result<Any, Error>) -> Void) {
-        self.database.child("\(path)").observeSingleEvent(of: .value) { snapshot in
+        database.child("\(path)").observeSingleEvent(of: .value) { snapshot in
             guard let value = snapshot.value else { completion(.failure(DatabaseError.failedToFetch)); return }
             completion(.success(value))
         }
@@ -37,6 +41,10 @@ extension DatabaseManager {
 
 extension DatabaseManager {
     
+    /// Checks if user exists for given email
+    /// Parameters
+    ///  - `email`:               Target email to be checked
+    ///  - `completion`:    Async closure to return with result
     public func userExists(with email: String,
                            completion: @escaping ((Bool) -> Void)) {
         
@@ -56,23 +64,22 @@ extension DatabaseManager {
         database.child(user.safeEmail).setValue([
             "first_name": user.firstName,
             "last_name": user.lastName
-        ]) { error, _ in
+        ]) { [weak self] error, _ in
             guard error == nil else {
                 print("Failed to write to database")
                 completion(false)
                 return
             }
             
-            self.database.child("users").observeSingleEvent(of: .value) { snapshot in
+            self?.database.child("users").observeSingleEvent(of: .value) { [weak self] snapshot in
                 if var usersCollection = snapshot.value as? [[String: String]] {
-                    //append to user dictionary
                     let newElement = [
                         "name": user.firstName + " " + user.lastName,
                         "email": user.safeEmail
                     ]
                     usersCollection.append(newElement)
                     
-                    self.database.child("users").setValue(usersCollection) { error, _ in
+                    self?.database.child("users").setValue(usersCollection) { error, _ in
                         guard error == nil else {
                             completion(false)
                             return
@@ -81,14 +88,13 @@ extension DatabaseManager {
                     }
                 }
                 else {
-                    //create that array
                     let newCollection: [[String: String]] = [
                         [
                             "name": user.firstName + " " + user.lastName,
                             "email": user.safeEmail
                         ]
                     ]
-                    self.database.child("users").setValue(newCollection) { error, _ in
+                    self?.database.child("users").setValue(newCollection) { error, _ in
                         guard error == nil else {
                             completion(false)
                             return
@@ -114,6 +120,13 @@ extension DatabaseManager {
     
     public enum DatabaseError: Error {
         case failedToFetch
+        
+        public var localisedDescription: String {
+            switch self {
+            case .failedToFetch:
+                return "Could not fetch data"
+            }
+        }
     }
 }
 
@@ -406,7 +419,6 @@ extension DatabaseManager {
         let currentEmail = DatabaseManager.safeEmail(emailAddress: myEmail)
         
         database.child("\(conversation)/messages").observeSingleEvent(of: .value) { [weak self] snapshot in
-            guard let strongSelf = self else { return }
             guard var currentMessages = snapshot.value as? [[String: Any]] else {completion(false); return }
             
             let messageDate = newMessage.sentDate
@@ -444,13 +456,13 @@ extension DatabaseManager {
                 "name": name
             ]
             currentMessages.append(newMessageEntry)
-            strongSelf.database.child("\(conversation)/messages").setValue(currentMessages) { error, _ in
+            self?.database.child("\(conversation)/messages").setValue(currentMessages) { error, _ in
                 guard error == nil else {
                     completion(false)
                     return
                 }
                 
-                strongSelf.database.child("\(currentEmail)/conversations").observeSingleEvent(of: .value) { snapshot in
+                self?.database.child("\(currentEmail)/conversations").observeSingleEvent(of: .value) { snapshot in
                     var databaseEntryConversations = [[String: Any]]()
                     let updatedValue: [String: Any] = [
                         "date": dateString,
@@ -498,14 +510,14 @@ extension DatabaseManager {
                         ]
                     }
                     
-                    strongSelf.database.child("\(currentEmail)/conversations").setValue(databaseEntryConversations) { error, _ in
+                    self?.database.child("\(currentEmail)/conversations").setValue(databaseEntryConversations) { error, _ in
                         guard error == nil else {
                             completion(false)
                             return
                         }
                         
                         // Update latest message for recipient
-                        strongSelf.database.child("\(otherUserEmail)/conversations").observeSingleEvent(of: .value) { snapshot in
+                        self?.database.child("\(otherUserEmail)/conversations").observeSingleEvent(of: .value) { snapshot in
                             let updatedValue: [String: Any] = [
                                 "date": dateString,
                                 "is_read": false,
@@ -556,7 +568,7 @@ extension DatabaseManager {
                                 ]
                             }
                             
-                            strongSelf.database.child("\(otherUserEmail)/conversations").setValue(databaseEntryConversations) { error, _ in
+                            self?.database.child("\(otherUserEmail)/conversations").setValue(databaseEntryConversations) { error, _ in
                                 guard error == nil else {
                                     completion(false)
                                     return

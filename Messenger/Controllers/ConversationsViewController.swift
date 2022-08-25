@@ -8,21 +8,9 @@
 import UIKit
 import FirebaseAuth
 import JGProgressHUD
+import MapKit
 
-struct Conversation {
-    let id: String
-    let name: String
-    let otherUserEmail: String
-    let latestMessage: LatestMessage
-}
-
-struct LatestMessage {
-    let date: String
-    let text: String
-    let isRead: Bool
-}
-
-class ConversationsViewController: UIViewController {
+final class ConversationsViewController: UIViewController {
 
     private let spinner = JGProgressHUD(style: .dark)
     
@@ -41,7 +29,7 @@ class ConversationsViewController: UIViewController {
     
     private let noConversationsLabel: UILabel = {
         let label = UILabel()
-        label.text = "No conversations yet!"
+        label.text = "No conversations yet..."
         label.textAlignment = .center
         label.textColor = .gray
         label.font = .systemFont(ofSize: 21, weight: .medium)
@@ -57,7 +45,6 @@ class ConversationsViewController: UIViewController {
         view.addSubview(tableView)
         view.addSubview(noConversationsLabel)
         setUpTableView()
-        fetchConversations()
         startListeningForConversations()
         loginObserver = NotificationCenter.default.addObserver(forName: .didLogInNotification,
                                                                object: nil,
@@ -80,8 +67,12 @@ class ConversationsViewController: UIViewController {
             switch result {
             case .success(let conversations):
                 guard !conversations.isEmpty else {
+                    self?.tableView.isHidden = true
+                    self?.noConversationsLabel.isHidden = false
                     return
                 }
+                self?.noConversationsLabel.isHidden = true
+                self?.tableView.isHidden = false
                 self?.conversations = conversations
                 
                 DispatchQueue.main.async {
@@ -89,6 +80,8 @@ class ConversationsViewController: UIViewController {
                 }
                 
             case .failure(let error):
+                self?.noConversationsLabel.isHidden = false
+                self?.tableView.isHidden = true
                 print("Failed to get conversations: \(error)")
             }
         }
@@ -98,9 +91,9 @@ class ConversationsViewController: UIViewController {
     public func didTapComposeButton() {
         let vc = NewConversationViewController()
         vc.completion = { [weak self] result in
-            guard let strongSelf = self else { return }
+            guard let conversations = self?.conversations else { return }
             
-            let currentConversations = strongSelf.conversations
+            let currentConversations = conversations
             
             if let targetConversation = currentConversations.first(where: {
                 $0.otherUserEmail == DatabaseManager.safeEmail(emailAddress: result.email)
@@ -109,10 +102,10 @@ class ConversationsViewController: UIViewController {
                 vc.isNewConversation = false
                 vc.title = targetConversation.name
                 vc.navigationItem.largeTitleDisplayMode = .never
-                strongSelf.navigationController?.pushViewController(vc, animated: true)
+                self?.navigationController?.pushViewController(vc, animated: true)
             }
             else {
-                strongSelf.createNewConversation(result: result)
+                self?.createNewConversation(result: result)
             }
         }
         let navVC = UINavigationController(rootViewController: vc)
@@ -144,11 +137,15 @@ class ConversationsViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         tableView.frame = view.bounds
+        noConversationsLabel.frame = CGRect(x:10,
+                                            y: (view.height-100)/2,
+                                            width: view.width - 20,
+                                            height: 100)
     }
-
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        self.validateAuth()
+        validateAuth()
     }
     
     private func validateAuth() {
@@ -163,10 +160,6 @@ class ConversationsViewController: UIViewController {
     private func setUpTableView() {
         tableView.delegate = self
         tableView.dataSource = self
-    }
-    
-    private func fetchConversations() {
-        tableView.isHidden = false
     }
 }
 
@@ -210,16 +203,15 @@ extension ConversationsViewController: UITableViewDelegate, UITableViewDataSourc
             // begin delete
             let conversationId = conversations[indexPath.row].id
             tableView.beginUpdates()
-            
-            DatabaseManager.shared.deleteConversation(conversationId: conversationId) { [weak self] success in
-                if success {
-                    self?.conversations.remove(at: indexPath.row)
-                    tableView.deleteRows(at: [indexPath], with: .left)
+            self.conversations.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .left)
+            DatabaseManager.shared.deleteConversation(conversationId: conversationId) { success in
+                if !success {
+                    //TODO: Add model and row back
+                    print("failed to delete")
                 }
             }
-
             tableView.endUpdates()
         }
     }
-    
 }

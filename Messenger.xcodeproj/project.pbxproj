@@ -17,7 +17,6 @@
 		BF40BF09289D729A0021FEE8 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF40BF08289D729A0021FEE8 /* LoginViewController.swift */; };
 		BF40BF0B289D72A70021FEE8 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF40BF0A289D72A70021FEE8 /* RegisterViewController.swift */; };
 		BF40BF0D289D72C60021FEE8 /* PhotoViewerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF40BF0C289D72C60021FEE8 /* PhotoViewerViewController.swift */; };
-		BF40BF0F289D72D20021FEE8 /* VideoPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF40BF0E289D72D20021FEE8 /* VideoPlayerViewController.swift */; };
 		BF40BF11289D72F00021FEE8 /* NewConversationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF40BF10289D72F00021FEE8 /* NewConversationViewController.swift */; };
 		BF40BF13289D73070021FEE8 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF40BF12289D73070021FEE8 /* ProfileViewController.swift */; };
 		BF40BF16289E57A20021FEE8 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF40BF15289E57A20021FEE8 /* Extensions.swift */; };
@@ -28,6 +27,10 @@
 		BF73AE5528B3C487002176D2 /* ConversationsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF73AE5428B3C487002176D2 /* ConversationsTableViewCell.swift */; };
 		BF73AE5728B535CE002176D2 /* NewConversationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF73AE5628B535CE002176D2 /* NewConversationCell.swift */; };
 		BF73AE5928B77144002176D2 /* LocationPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF73AE5828B77144002176D2 /* LocationPickerViewController.swift */; };
+		BF73AE5C28B7B3FF002176D2 /* ConversationModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF73AE5B28B7B3FF002176D2 /* ConversationModels.swift */; };
+		BF73AE5E28B7B426002176D2 /* ChatModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF73AE5D28B7B426002176D2 /* ChatModels.swift */; };
+		BF73AE6028B7B45A002176D2 /* SearchResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF73AE5F28B7B459002176D2 /* SearchResults.swift */; };
+		BF73AE6228B7B494002176D2 /* ProfileModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF73AE6128B7B494002176D2 /* ProfileModels.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,7 +47,6 @@
 		BF40BF08289D729A0021FEE8 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		BF40BF0A289D72A70021FEE8 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		BF40BF0C289D72C60021FEE8 /* PhotoViewerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoViewerViewController.swift; sourceTree = "<group>"; };
-		BF40BF0E289D72D20021FEE8 /* VideoPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerViewController.swift; sourceTree = "<group>"; };
 		BF40BF10289D72F00021FEE8 /* NewConversationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewConversationViewController.swift; sourceTree = "<group>"; };
 		BF40BF12289D73070021FEE8 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		BF40BF15289E57A20021FEE8 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
@@ -56,6 +58,10 @@
 		BF73AE5428B3C487002176D2 /* ConversationsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationsTableViewCell.swift; sourceTree = "<group>"; };
 		BF73AE5628B535CE002176D2 /* NewConversationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewConversationCell.swift; sourceTree = "<group>"; };
 		BF73AE5828B77144002176D2 /* LocationPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationPickerViewController.swift; sourceTree = "<group>"; };
+		BF73AE5B28B7B3FF002176D2 /* ConversationModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationModels.swift; sourceTree = "<group>"; };
+		BF73AE5D28B7B426002176D2 /* ChatModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatModels.swift; sourceTree = "<group>"; };
+		BF73AE5F28B7B459002176D2 /* SearchResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResults.swift; sourceTree = "<group>"; };
+		BF73AE6128B7B494002176D2 /* ProfileModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModels.swift; sourceTree = "<group>"; };
 		DFE3864A3D20B8229166DFDA /* Pods_Messenger.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Messenger.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -119,7 +125,6 @@
 				BF40BEF2289D6FB10021FEE8 /* ConversationsViewController.swift */,
 				BF40BF14289E528B0021FEE8 /* Login */,
 				BF40BF0C289D72C60021FEE8 /* PhotoViewerViewController.swift */,
-				BF40BF0E289D72D20021FEE8 /* VideoPlayerViewController.swift */,
 				BF40BF10289D72F00021FEE8 /* NewConversationViewController.swift */,
 				BF40BF12289D73070021FEE8 /* ProfileViewController.swift */,
 				BF4EF1EF28A17382008224E4 /* ChatViewController.swift */,
@@ -141,6 +146,10 @@
 		BF40BF04289D71B00021FEE8 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				BF73AE5B28B7B3FF002176D2 /* ConversationModels.swift */,
+				BF73AE5D28B7B426002176D2 /* ChatModels.swift */,
+				BF73AE5F28B7B459002176D2 /* SearchResults.swift */,
+				BF73AE6128B7B494002176D2 /* ProfileModels.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -203,6 +212,7 @@
 				BF40BEE8289D6FB10021FEE8 /* Frameworks */,
 				BF40BEE9289D6FB10021FEE8 /* Resources */,
 				CDFD64EEF3797AEAB4F3B748 /* [CP] Embed Pods Frameworks */,
+				BF73AE5A28B789C1002176D2 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -261,6 +271,25 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		BF73AE5A28B789C1002176D2 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 8;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"\"${PODS_ROOT}/FirebaseCrashlytics/upload-symbols\" -gsp \"${PROJECT_DIR}/Messenger/GoogleService-Info.plist\" -p ios \"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}\"",
+				"$(SRCROOT)/$(BUILT_PRODUCTS_DIR)/$(INFOPLIST_PATH)",
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+			shellPath = /bin/sh;
+			shellScript = "\"${BUILD_DIR%/Build/*}/SourcePackages/checkouts/firebase-ios-sdk/Crashlytics/run\"\n";
+		};
 		CDFD64EEF3797AEAB4F3B748 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -310,16 +339,19 @@
 				BF40BF09289D729A0021FEE8 /* LoginViewController.swift in Sources */,
 				BF73AE5728B535CE002176D2 /* NewConversationCell.swift in Sources */,
 				BF40BF1A289FCE460021FEE8 /* DatabaseManager.swift in Sources */,
+				BF73AE5E28B7B426002176D2 /* ChatModels.swift in Sources */,
 				BF40BF0B289D72A70021FEE8 /* RegisterViewController.swift in Sources */,
 				BF40BF11289D72F00021FEE8 /* NewConversationViewController.swift in Sources */,
 				BF73AE5528B3C487002176D2 /* ConversationsTableViewCell.swift in Sources */,
 				BF40BEF3289D6FB10021FEE8 /* ConversationsViewController.swift in Sources */,
-				BF40BF0F289D72D20021FEE8 /* VideoPlayerViewController.swift in Sources */,
 				BF40BF16289E57A20021FEE8 /* Extensions.swift in Sources */,
 				BF40BEEF289D6FB10021FEE8 /* AppDelegate.swift in Sources */,
 				BF40BF13289D73070021FEE8 /* ProfileViewController.swift in Sources */,
+				BF73AE6028B7B45A002176D2 /* SearchResults.swift in Sources */,
+				BF73AE6228B7B494002176D2 /* ProfileModels.swift in Sources */,
 				BF40BEF1289D6FB10021FEE8 /* SceneDelegate.swift in Sources */,
 				BF4EF1F028A17382008224E4 /* ChatViewController.swift in Sources */,
+				BF73AE5C28B7B3FF002176D2 /* ConversationModels.swift in Sources */,
 				BF40BF0D289D72C60021FEE8 /* PhotoViewerViewController.swift in Sources */,
 				BF4EF1F228A2E053008224E4 /* StorageManager.swift in Sources */,
 				BF73AE5928B77144002176D2 /* LocationPickerViewController.swift in Sources */,
@@ -381,7 +413,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;

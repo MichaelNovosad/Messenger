@@ -11,17 +11,7 @@ import FBSDKLoginKit
 import GoogleSignIn
 import SDWebImage
 
-enum ProfileViewModelType {
-    case info, logout
-}
-
-struct ProfileViewModel {
-    let viewModelType: ProfileViewModelType
-    let title: String
-    let handler: (() -> Void)?
-}
-
-class ProfileViewController: UIViewController {
+final class ProfileViewController: UIViewController {
     
     @IBOutlet var tableView: UITableView!
     
@@ -57,8 +47,10 @@ class ProfileViewController: UIViewController {
         actionSheet.addAction(UIAlertAction(title: "Log Out",
                                       style: .destructive,
                                       handler: { [weak self] _ in
-            guard let strongSelf = self else { return }
             
+            UserDefaults.standard.setValue(nil, forKey: "email")
+            UserDefaults.standard.setValue(nil, forKey: "name")
+
             // Log Out Facebook
             FBSDKLoginKit.LoginManager().logOut()
             
@@ -71,7 +63,7 @@ class ProfileViewController: UIViewController {
                 let vc = LoginViewController()
                 let nav = UINavigationController(rootViewController: vc)
                 nav.modalPresentationStyle = .fullScreen
-                strongSelf.present(nav, animated: true)
+                self?.present(nav, animated: true)
             }
             catch {
                 print("Failed to log out")
@@ -146,14 +138,14 @@ class ProfileTableViewCell: UITableViewCell {
     static let identifier = "ProfileTableViewCell"
     
     public func setUp(with viewModel: ProfileViewModel) {
-        self.textLabel?.text = viewModel.title
+        textLabel?.text = viewModel.title
         switch viewModel.viewModelType {
         case .info:
-            self.textLabel?.textAlignment = .left
-            self.selectionStyle = .none
+            textLabel?.textAlignment = .left
+            selectionStyle = .none
         case .logout:
-            self.textLabel?.textColor = .red
-            self.textLabel?.textAlignment = .center
+            textLabel?.textColor = .red
+            textLabel?.textAlignment = .center
         }
     }
     

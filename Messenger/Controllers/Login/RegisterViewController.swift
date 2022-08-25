@@ -9,7 +9,7 @@ import UIKit
 import FirebaseAuth
 import JGProgressHUD
 
-class RegisterViewController: UIViewController {
+final class RegisterViewController: UIViewController {
     
     private let spinner = JGProgressHUD(style: .dark)
     
@@ -200,14 +200,13 @@ class RegisterViewController: UIViewController {
         //Firebase Log In
         
         DatabaseManager.shared.userExists(with: email) { [weak self] exists in
-            guard let strongSelf = self else { return }
             
             DispatchQueue.main.async {
-                strongSelf.spinner.dismiss(animated: true)
+                self?.spinner.dismiss(animated: true)
             }
             
             guard !exists else {
-                strongSelf.alertUserLoginError(message: "Looks like a user account for that email address already exists.")
+                self?.alertUserLoginError(message: "Looks like a user account for that email address already exists.")
                 return
             }
             
@@ -218,12 +217,15 @@ class RegisterViewController: UIViewController {
                     return
                 }
                 
+                UserDefaults.standard.setValue(email, forKey: "email")
+                UserDefaults.standard.setValue("\(firstName) \(lastName)", forKey: "name")
+                
                     let chatUser = ChatAppUser(firstName: firstName,
                                                lastName: lastName,
                                                emailAddress: email)
                     DatabaseManager.shared.insertUser(with: chatUser) { success in
                         if success {
-                            guard let image = strongSelf.imageView.image,
+                            guard let image = self?.imageView.image,
                                     let data = image.pngData() else {
                                 return
                             }
@@ -240,7 +242,7 @@ class RegisterViewController: UIViewController {
                         }
                     }
 
-                strongSelf.navigationController?.dismiss(animated: true)
+                self?.navigationController?.dismiss(animated: true)
             }
         }
     }
@@ -323,7 +325,7 @@ extension RegisterViewController: UIImagePickerControllerDelegate, UINavigationC
         
         guard let selectedImage = info[.editedImage] as? UIImage else { return }
         
-        self.imageView.image = selectedImage
+        imageView.image = selectedImage
     }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
