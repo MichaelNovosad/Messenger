@@ -107,10 +107,7 @@ final class RegisterViewController: UIViewController {
         title = "Register"
         view.backgroundColor = .systemBackground
         
-        registerButton.addTarget(self,
-                              action: #selector(loginButtonTapped),
-                              for: .touchUpInside)
-        
+        registerButton.addTarget(self, action: #selector(loginButtonTapped), for: .touchUpInside)
         emailField.delegate = self
         passwordField.delegate = self
         
@@ -126,8 +123,7 @@ final class RegisterViewController: UIViewController {
         imageView.isUserInteractionEnabled = true
         scrollView.isUserInteractionEnabled = true
         
-        let gesture = UITapGestureRecognizer(target: self,
-                                             action: #selector(didTapChangeProfilePic))
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(didTapChangeProfilePic))
         gesture.numberOfTapsRequired = 1
         gesture.numberOfTouchesRequired = 1
         imageView.addGestureRecognizer(gesture)
@@ -213,7 +209,7 @@ final class RegisterViewController: UIViewController {
             FirebaseAuth.Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
                 guard authResult != nil,
                       error == nil else {
-                    print("Error creating user: \(error?.localizedDescription)")
+                    print("Error creating user: \(String(describing: error?.localizedDescription))")
                     return
                 }
                 
@@ -241,7 +237,6 @@ final class RegisterViewController: UIViewController {
                             }
                         }
                     }
-
                 self?.navigationController?.dismiss(animated: true)
             }
         }
@@ -320,16 +315,11 @@ extension RegisterViewController: UIImagePickerControllerDelegate, UINavigationC
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         picker.dismiss(animated: true)
-
-        print(info)
-        
         guard let selectedImage = info[.editedImage] as? UIImage else { return }
-        
         imageView.image = selectedImage
     }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         picker.dismiss(animated: true)
     }
-    
 }

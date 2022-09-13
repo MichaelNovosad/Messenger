@@ -40,5 +40,4 @@ final class PhotoViewerViewController: UIViewController {
         super.viewDidLayoutSubviews()
         imageView.frame = view.bounds
     }
- 
 }

@@ -62,5 +62,19 @@
 			</array>
 		</dict>
 	</dict>
+    
+    <key>CFBundleURLTypes</key>
+    <array>
+      <dict>
+      <key>CFBundleURLSchemes</key>
+      <array>
+        <string>fb1065739160746646</string>
+      </array>
+      </dict>
+    </array>
+    <key>FacebookAppID</key>
+    <string>1065739160746646</string>
+    <key>FacebookDisplayName</key>
+    <string>Vylo</string>
 </dict>
 </plist>

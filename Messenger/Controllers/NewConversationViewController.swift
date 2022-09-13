@@ -11,13 +11,9 @@ import JGProgressHUD
 final class NewConversationViewController: UIViewController {
 
     public var completion: ((SearchResult) -> Void)?
-    
     private let spinner = JGProgressHUD(style: .dark)
-    
     private var users = [[String: String]]()
-    
     private var results = [SearchResult]()
-    
     private var hasFetched = false
     
     private var searchBar: UISearchBar = {
@@ -118,14 +114,10 @@ extension NewConversationViewController: UISearchBarDelegate {
         searchUsers(query: text)
     }
     func searchUsers(query: String) {
-        //check if array has firebase results
         if hasFetched {
-            // if it does: filter
             filterUsers(with: query)
-            
         }
         else {
-            // if not, fetch then filter
             DatabaseManager.shared.getAllUsers { [weak self] result in
                 switch result {
                 case .success(let usersCollection):
@@ -140,14 +132,8 @@ extension NewConversationViewController: UISearchBarDelegate {
     }
     
     func filterUsers(with term: String) {
-        // update the UI: either show results or empty state
-        guard let currentUserEmail = UserDefaults.standard.value(forKey: "email") as? String,
-              hasFetched else {
-            return
-        }
-        
-        let safeEmail = DatabaseManager.safeEmail(emailAddress: currentUserEmail)
-        
+        guard hasFetched else { return }
+        let safeEmail = DatabaseManager.shared.returnSafeUserEmail()
         self.spinner.dismiss(animated: true)
         
         let results: [SearchResult] = self.users.filter({
@@ -166,7 +152,6 @@ extension NewConversationViewController: UISearchBarDelegate {
         })
         
         self.results = results
-        
         updateUI()
     }
     

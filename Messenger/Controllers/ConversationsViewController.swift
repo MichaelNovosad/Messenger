@@ -13,9 +13,7 @@ import MapKit
 final class ConversationsViewController: UIViewController {
 
     private let spinner = JGProgressHUD(style: .dark)
-    
     private var conversations = [Conversation]()
-    
     private var loginObserver: NSObjectProtocol?
     
     private let tableView: UITableView = {
@@ -23,7 +21,6 @@ final class ConversationsViewController: UIViewController {
         table.isHidden = true
         table.register(ConversationsTableViewCell.self,
                        forCellReuseIdentifier: ConversationsTableViewCell.identifier)
-        
         return table
     }()
     
@@ -39,30 +36,22 @@ final class ConversationsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .compose,
-                                                            target: self, action: #selector(didTapComposeButton))
-        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .compose, target: self, action: #selector(didTapComposeButton))
         view.addSubview(tableView)
         view.addSubview(noConversationsLabel)
         setUpTableView()
         startListeningForConversations()
-        loginObserver = NotificationCenter.default.addObserver(forName: .didLogInNotification,
-                                                               object: nil,
-                                                               queue: .main) { [weak self] _ in
+        loginObserver = NotificationCenter.default.addObserver(forName: .didLogInNotification, object: nil, queue: .main) { [weak self] _ in
             self?.startListeningForConversations()
         }
     }
     
     private func startListeningForConversations() {
-        guard let email = UserDefaults.standard.value(forKey: "email") as? String else {
-            return
-        }
-        
         if let loginObserver = loginObserver {
             NotificationCenter.default.removeObserver(loginObserver)
         }
         
-        let safeEmail = DatabaseManager.safeEmail(emailAddress: email)
+        let safeEmail = DatabaseManager.shared.returnSafeUserEmail()
         DatabaseManager.shared.getAllConversations(for: safeEmail) { [weak self] result in
             switch result {
             case .success(let conversations):
@@ -98,11 +87,7 @@ final class ConversationsViewController: UIViewController {
             if let targetConversation = currentConversations.first(where: {
                 $0.otherUserEmail == DatabaseManager.safeEmail(emailAddress: result.email)
             }) {
-                let vc = ChatViewController(with: targetConversation.otherUserEmail, id: targetConversation.id)
-                vc.isNewConversation = false
-                vc.title = targetConversation.name
-                vc.navigationItem.largeTitleDisplayMode = .never
-                self?.navigationController?.pushViewController(vc, animated: true)
+                self?.openChatViewController(with: targetConversation.otherUserEmail, name: targetConversation.name, id: targetConversation.id, isNewConversation: false)
             }
             else {
                 self?.createNewConversation(result: result)
@@ -119,19 +104,19 @@ final class ConversationsViewController: UIViewController {
         DatabaseManager.shared.conversationExists(with: email) { [weak self] result in
             switch result {
             case .success(let conversationId):
-                let vc = ChatViewController(with: email, id: conversationId)
-                vc.isNewConversation = false
-                vc.title = name
-                vc.navigationItem.largeTitleDisplayMode = .never
-                self?.navigationController?.pushViewController(vc, animated: true)
+                self?.openChatViewController(with: email, name: name, id: conversationId, isNewConversation: false)
             case .failure(_):
-                let vc = ChatViewController(with: email, id: nil)
-                vc.isNewConversation = true
-                vc.title = name
-                vc.navigationItem.largeTitleDisplayMode = .never
-                self?.navigationController?.pushViewController(vc, animated: true)
+                self?.openChatViewController(with: email, name: name, isNewConversation: true)
             }
         }
+    }
+    
+    private func openChatViewController(with email: String, name: String, id: String? = nil, isNewConversation: Bool) {
+        let vc = ChatViewController(with: email, id: id)
+        vc.isNewConversation = isNewConversation
+        vc.title = name
+        vc.navigationItem.largeTitleDisplayMode = .never
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     override func viewDidLayoutSubviews() {
@@ -179,7 +164,6 @@ extension ConversationsViewController: UITableViewDelegate, UITableViewDataSourc
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let model = conversations[indexPath.row]
-
         openConversation(model)
     }
     
@@ -200,14 +184,12 @@ extension ConversationsViewController: UITableViewDelegate, UITableViewDataSourc
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            // begin delete
             let conversationId = conversations[indexPath.row].id
             tableView.beginUpdates()
             self.conversations.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .left)
             DatabaseManager.shared.deleteConversation(conversationId: conversationId) { success in
                 if !success {
-                    //TODO: Add model and row back
                     print("failed to delete")
                 }
             }

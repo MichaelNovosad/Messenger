@@ -18,15 +18,6 @@ final class ChatViewController: MessagesViewController {
     private var senderPhotoURL: URL?
     private var otherUserPhotoURL: URL?
     
-    public static let dateFormatter: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.dateStyle = .medium
-        formatter.timeStyle = .long
-        formatter.locale = .current
-        formatter.dateFormat = "yyyy-MM-dd, HH:mm:ss Z"
-        return formatter
-    }()
-    
     public let otherUserEmail: String
     public var conversationId: String?
     
@@ -44,6 +35,15 @@ final class ChatViewController: MessagesViewController {
                       senderId: safeEmail,
                       displayName: "Me")
     }
+    
+    public static let dateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .medium
+        formatter.timeStyle = .long
+        formatter.locale = .current
+        formatter.dateFormat = "yyyy-MM-dd, HH:mm:ss Z"
+        return formatter
+    }()
     
     init(with email: String, id: String?) {
         self.otherUserEmail = email

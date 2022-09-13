@@ -287,8 +287,7 @@ extension LoginViewController: LoginButtonDelegate {
             UserDefaults.standard.set("\(firstName) \(lastName)", forKey: "name")
 
             print(result)
-            DatabaseManager.shared.userExists(with: email) { [weak self] exists in
-                guard let strongSelf = self else { return }
+            DatabaseManager.shared.userExists(with: email) { exists in
                 if !exists {
                     let chatUser = ChatAppUser(firstName: firstName,
                                                lastName: lastName,
@@ -361,7 +360,6 @@ extension LoginViewController {
                 let user = user
             else { return }
             
-            
             user.authentication.do { authentication, error in
                 guard
                     error == nil,
@@ -385,8 +383,7 @@ extension LoginViewController {
                 UserDefaults.standard.set(email, forKey: "email")
                 UserDefaults.standard.set("\(firstName) \(lastName)", forKey: "name")
 
-                DatabaseManager.shared.userExists(with: email) { [weak self] exists in
-                    guard let strongSelf = self else { return }
+                DatabaseManager.shared.userExists(with: email) { exists in
                     if !exists {
                         let chatUser = ChatAppUser(firstName: firstName,
                                                    lastName: lastName,
@@ -416,7 +413,6 @@ extension LoginViewController {
                                         }.resume()
                                     }
                                 }
-                                
                             }
                         }
                     }
@@ -424,7 +420,6 @@ extension LoginViewController {
                 
                 let credential = GoogleAuthProvider.credential(withIDToken: idToken,
                                                                accessToken: authentication.accessToken)
-                
                 FirebaseAuth.Auth.auth().signIn(with: credential) { [weak self] authResult, error in
                     guard authResult != nil, error == nil else {
                         if let error = error {
@@ -434,7 +429,6 @@ extension LoginViewController {
                     }
                     print("Successfully Signed In via Google")
                     NotificationCenter.default.post(name: .didLogInNotification, object: nil)
-                    
                     self?.navigationController?.dismiss(animated: true)
                 }
             }

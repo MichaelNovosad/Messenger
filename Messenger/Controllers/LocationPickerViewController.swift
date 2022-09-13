@@ -10,11 +10,8 @@ import CoreLocation
 import MapKit
 
 final class LocationPickerViewController: UIViewController {
-
     private var coordinates: CLLocationCoordinate2D?
-    
     public var completion: ((CLLocationCoordinate2D) -> Void)?
-    
     private var isPickable = true
     
     private let map: MKMapView = {
@@ -45,7 +42,6 @@ final class LocationPickerViewController: UIViewController {
             map.addGestureRecognizer(gesture)
         }
         else {
-            
             guard let coordinates = self.coordinates else {
                 return
             }
@@ -62,11 +58,9 @@ final class LocationPickerViewController: UIViewController {
         let locationInView = gesture.location(in: map)
         let coordinates = map.convert(locationInView, toCoordinateFrom: map)
         self.coordinates = coordinates
-        // drop a pin on that location
         for annotation in map.annotations {
             map.removeAnnotation(annotation)
         }
-        
         
         let pin = MKPointAnnotation()
         pin.coordinate = coordinates
