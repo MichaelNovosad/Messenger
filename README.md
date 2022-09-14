@@ -19,6 +19,10 @@ Swift project to create a real time chat application in Swift 5 using Firebase.
 
 <img src="https://github.com/MichaelNovosad/Messenger/blob/main/screenshots/Simulator%20Screen%20Shot%20-%20iPhone%2013%20Pro%20-%202022-09-13%20at%2021.11.23.png" width="350x250">
 
+## Chats with users
+
+<img src="https://github.com/MichaelNovosad/Messenger/blob/main/screenshots/Simulator%20Screen%20Shot%20-%20iPhone%2013%20Pro%20-%202022-09-13%20at%2021.13.45.png" width="350x250">
+
 ## Send messages in live chat
 
 <img src="https://github.com/MichaelNovosad/Messenger/blob/main/screenshots/Simulator%20Screen%20Shot%20-%20iPhone%2013%20Pro%20-%202022-09-13%20at%2021.24.32.png" width="350x250">
