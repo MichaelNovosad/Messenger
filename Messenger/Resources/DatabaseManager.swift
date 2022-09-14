@@ -301,6 +301,7 @@ extension DatabaseManager {
         }
     }
     
+    
     /// Gets all messages for a given conversation
     public func getAllMessagesForConversation(with id: String, completion: @escaping (Result<[Message], Error>) -> Void) {
         database.child("\(id)/messages").observe(.value) { [weak self] snapshot in
@@ -319,20 +320,7 @@ extension DatabaseManager {
                       let date = ChatViewController.dateFormatter.date(from: dateString)
                 else { return nil }
                 
-                var kind: MessageKind?
-                if type == "video" {
-                    guard let video = self?.returnVideoData(content) else { return nil }
-                    kind = .video(video)
-                } else if type == "photo" {
-                    guard let photo = self?.returnPhotoData(content) else { return nil }
-                    kind = .photo(photo)
-                } else if type == "location" {
-                    guard let location = self?.returnLocationData(content) else { return nil }
-                    kind = .location(location)
-                } else {
-                    kind = .text(content)
-                }
-                
+                var kind = self?.returnMessageKind(with: content, for: type)
                 guard let finalKind = kind else { return nil }
                 
                 let sender = Sender(photoURL: "",
@@ -342,6 +330,24 @@ extension DatabaseManager {
             }
             completion(.success(messages))
         }
+    }
+    
+    /// Returns message kind for Message
+    private func returnMessageKind(with content: String, for type: String) -> MessageKind? {
+        var kind: MessageKind?
+        if type == "video" {
+            guard let video = self.returnVideoData(content) else { return nil }
+            kind = .video(video)
+        } else if type == "photo" {
+            guard let photo = self.returnPhotoData(content) else { return nil }
+            kind = .photo(photo)
+        } else if type == "location" {
+            guard let location = self.returnLocationData(content) else { return nil }
+            kind = .location(location)
+        } else {
+            kind = .text(content)
+        }
+        return kind
     }
     
     /// Returns photo data for getAllMessages method according to its content.

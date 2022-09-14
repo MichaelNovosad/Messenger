@@ -7,24 +7,10 @@
 		<dict>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>fb871972947115185</string>
-			</array>
-		</dict>
-		<dict>
-			<key>CFBundleTypeRole</key>
-			<string>Editor</string>
-			<key>CFBundleURLSchemes</key>
-			<array>
-				<string>com.googleusercontent.apps.819117681595-fuqv792gk5v9flk7angj3bl77b442jj9</string>
+				<string>fb1065739160746646</string>
 			</array>
 		</dict>
 	</array>
-	<key>FacebookAppID</key>
-	<string>871972947115185</string>
-	<key>FacebookClientToken</key>
-	<string>76279ac0303980086700e35b4b18d5e6</string>
-	<key>FacebookDisplayName</key>
-	<string>My Messenger</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>fbapi</string>
@@ -62,19 +48,5 @@
 			</array>
 		</dict>
 	</dict>
-    
-    <key>CFBundleURLTypes</key>
-    <array>
-      <dict>
-      <key>CFBundleURLSchemes</key>
-      <array>
-        <string>fb1065739160746646</string>
-      </array>
-      </dict>
-    </array>
-    <key>FacebookAppID</key>
-    <string>1065739160746646</string>
-    <key>FacebookDisplayName</key>
-    <string>Vylo</string>
 </dict>
 </plist>

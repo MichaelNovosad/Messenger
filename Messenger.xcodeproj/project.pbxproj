@@ -20,7 +20,6 @@
 		BF40BF11289D72F00021FEE8 /* NewConversationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF40BF10289D72F00021FEE8 /* NewConversationViewController.swift */; };
 		BF40BF13289D73070021FEE8 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF40BF12289D73070021FEE8 /* ProfileViewController.swift */; };
 		BF40BF16289E57A20021FEE8 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF40BF15289E57A20021FEE8 /* Extensions.swift */; };
-		BF40BF18289E75810021FEE8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BF40BF17289E75800021FEE8 /* GoogleService-Info.plist */; };
 		BF40BF1A289FCE460021FEE8 /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF40BF19289FCE450021FEE8 /* DatabaseManager.swift */; };
 		BF42AD7128BA78F100830150 /* MessagesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF42AD7028BA78F100830150 /* MessagesModel.swift */; };
 		BF4EF1F028A17382008224E4 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4EF1EF28A17382008224E4 /* ChatViewController.swift */; };
@@ -51,7 +50,6 @@
 		BF40BF10289D72F00021FEE8 /* NewConversationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewConversationViewController.swift; sourceTree = "<group>"; };
 		BF40BF12289D73070021FEE8 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		BF40BF15289E57A20021FEE8 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
-		BF40BF17289E75800021FEE8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		BF40BF19289FCE450021FEE8 /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
 		BF40BF1B289FEF5A0021FEE8 /* Messenger.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Messenger.entitlements; sourceTree = "<group>"; };
 		BF42AD7028BA78F100830150 /* MessagesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesModel.swift; sourceTree = "<group>"; };
@@ -109,7 +107,6 @@
 			isa = PBXGroup;
 			children = (
 				BF40BF1B289FEF5A0021FEE8 /* Messenger.entitlements */,
-				BF40BF17289E75800021FEE8 /* GoogleService-Info.plist */,
 				BF40BF06289D71BD0021FEE8 /* Resources */,
 				BF40BF05289D71B60021FEE8 /* ViewModels */,
 				BF40BF04289D71B00021FEE8 /* Models */,
@@ -265,7 +262,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				BF40BEFB289D6FB30021FEE8 /* LaunchScreen.storyboard in Resources */,
-				BF40BF18289E75810021FEE8 /* GoogleService-Info.plist in Resources */,
 				BF40BEF8289D6FB30021FEE8 /* Assets.xcassets in Resources */,
 				BF40BEF6289D6FB10021FEE8 /* Main.storyboard in Resources */,
 			);
